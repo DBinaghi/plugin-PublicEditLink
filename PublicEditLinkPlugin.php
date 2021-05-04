@@ -22,9 +22,20 @@ class PublicEditLinkPlugin extends Omeka_Plugin_AbstractPlugin
 				if ($acl->isAllowed($user, get_view()->collection, 'edit')) {
 					$navLinks = $this->updateNavlinks($navLinks, 'Collection');
 				} 	
+			} elseif (isset(get_view()->exhibit)) {
+				if ($acl->isAllowed($user, get_view()->exhibit, 'edit')) {
+					$navLinks = $this->updateNavlinks($navLinks, 'Exhibit');
+				} 	
 			} elseif (isset(get_view()->file)) {
 				if ($acl->isAllowed($user, get_view()->file, 'edit')) {
 					$navLinks = $this->updateNavlinks($navLinks, 'File');
+				}
+			} else {
+				$params = Zend_Controller_Front::getInstance()->getRequest()->getParams();
+				if ($params['controller'] == 'page' && isset($params['module']) && $params['module'] == 'simple-pages') {
+					if (in_array($user->role, array('super', 'admin', 'editor'))) {
+						$navLinks = $this->updateNavlinksSimplepage($navLinks, $params['id']);
+					}
 				}
 			}
 		}
@@ -42,6 +53,23 @@ class PublicEditLinkPlugin extends Omeka_Plugin_AbstractPlugin
 		$element = array(
 			'label' => __('Edit') . ' ' . __($type),
 			'uri' => admin_url('/' . strtolower($type) . 's/edit/' . metadata(strtolower($type), 'id'))
+		);
+		$navLinks[] = $element;
+		return array_merge($navLinks, $lastLink);
+	}
+
+	
+	public function updateNavlinksSimplepage($navLinks, $id)
+	{
+		// Saves copy of last menu item - normally, the logout one - then removes it
+		$lastLink = $navLinks;
+		array_splice($lastLink, 0, -1);
+		array_splice($navLinks, -1);
+		
+		// Creates new menu item, then adds it and finalize with saved last one
+		$element = array(
+			'label' => __('Edit this page'),
+			'uri' => admin_url('/simple-pages/index/edit/id/' . $id)
 		);
 		$navLinks[] = $element;
 		return array_merge($navLinks, $lastLink);
