@@ -1,10 +1,10 @@
 # Public Edit Link
 
 ## Description
-Plugin for Omeka Classic. Adds in the admin bar of the public interface a link to current Item/Collection/File editing page, if user is logged in.
+Plugin for Omeka Classic. Adds to the public interface's admin bar a link to current Item/Collection/File/Exhibit/SimplePage editing page, if user is logged in.
 
 ## Credit
-Original idea from the thread https://forum.omeka.org/t/add-a-link-to-modify-the-current-item/6580
+Original idea from the thread https://forum.omeka.org/t/add-a-link-to-modify-the-current-item/6580; some ideas from https://github.com/EMAN-Omeka/EditLinks too.
 
 ## Installation
 Uncompress files and rename plugin folder "MoreMediaTypes".
