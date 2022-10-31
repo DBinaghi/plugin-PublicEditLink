@@ -1,5 +1,7 @@
 # Public Edit Link
 
+## Important: this plugin has been now included in a broader plugin,  <a href="https://github.com/DBinaghi/plugin-AdminTools" target="_blank">Admin Tools</a>, therefore there won't be any more updates/releases of it as a stand-alone plugin. Please refer to Admin Tools' pages for issues and updates.
+
 ## Description
 Plugin for Omeka Classic. Adds to the public interface's admin bar a link to current Item/Collection/File/Exhibit/SimplePage editing page, if user is logged in.
 
